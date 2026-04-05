@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 // Since these are in /public/gallery/, the browser finds them at /gallery/
 const displayImages = Array.from({ length: 10 }, (_, i) => {
   const index = i + 1;
-  const src = `/gallery/${index}.png`;
+  const src = `/${index}.png`;
   
   return {
     src,
