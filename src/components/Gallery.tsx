@@ -1,24 +1,21 @@
 import { motion } from 'motion/react';
 
-// 1. We remove '/public' from the path. Vite maps the root '/' to the public folder.
-// 2. We add { as: 'url' } to ensure we get the string path directly.
-const galleryModules = import.meta.glob('/gallery/*.{jpg,jpeg,png,webp,gif}', { 
-  eager: true, 
-  as: 'url' 
+// Hardcoded solution for 1.png through 10.png
+// Since these are in /public/gallery/, the browser finds them at /gallery/
+const displayImages = Array.from({ length: 10 }, (_, i) => {
+  const index = i + 1;
+  const src = `/gallery/${index}.png`;
+  
+  return {
+    src,
+    alt: `Gallery Image ${index}`,
+    // Maintaining your original masonry-style logic
+    className: index % 5 === 0 ? "md:col-span-2 md:row-span-2" : 
+               index % 4 === 0 ? "md:col-span-2 md:row-span-1" : 
+               index % 3 === 0 ? "md:col-span-1 md:row-span-2" :
+               "md:col-span-1 md:row-span-1"
+  };
 });
-
-// Extract the URL strings from the module object
-const uploadedImages = Object.values(galleryModules);
-
-// Process the images for the grid layout
-const displayImages = uploadedImages.map((src, index) => ({
-  src,
-  alt: `Gallery Image ${index + 1}`,
-  className: index % 5 === 0 ? "md:col-span-2 md:row-span-2" : 
-             index % 4 === 0 ? "md:col-span-2 md:row-span-1" : 
-             index % 3 === 0 ? "md:col-span-1 md:row-span-2" :
-             "md:col-span-1 md:row-span-1"
-}));
 
 export default function Gallery() {
   return (
@@ -38,7 +35,7 @@ export default function Gallery() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="w-24 h-1 bg-jax-green mx-auto rounded-full"
+            className="w-24 h-1 bg-blue-600 mx-auto rounded-full"
           ></motion.div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -47,14 +44,8 @@ export default function Gallery() {
             transition={{ delay: 0.2 }}
             className="mt-6 text-slate-600 max-w-2xl mx-auto text-lg"
           >
-            Take a look at some of our recent installations and repair projects across the country.
+            Take a look at some of our recent installations and repair projects.
           </motion.p>
-          
-          {uploadedImages.length === 0 && (
-            <p className="mt-4 text-sm text-amber-600 bg-amber-50 inline-block px-4 py-2 rounded-md border border-amber-200">
-              Note: Upload images to the <strong>/public/gallery</strong> folder to see them here.
-            </p>
-          )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 auto-rows-[200px] gap-4">
@@ -71,8 +62,9 @@ export default function Gallery() {
                 src={image.src} 
                 alt={image.alt} 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                // Adding loading="lazy" helps with performance for large galleries
-                loading="lazy" 
+                loading="lazy"
+                // Error handling: if an image fails to load, we can see it in the console
+                onError={(e) => console.error(`Failed to load: ${image.src}`)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <span className="text-white font-bold text-lg">{image.alt}</span>
