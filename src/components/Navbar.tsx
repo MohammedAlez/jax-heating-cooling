@@ -1,6 +1,7 @@
 import { Phone, Menu, X, Flame, Snowflake } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import logoUrl from '/public/logo.jpg';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,7 +12,7 @@ export default function Navbar() {
         <div className="flex justify-between h-20 items-center">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <img src="/logo.jpg" alt="Jax Heating & Cooling Logo" className="h-16 w-auto object-contain rounded-sm" referrerPolicy="no-referrer" />
+            <img src={logoUrl} alt="Jax Heating & Cooling Logo" className="h-16 w-auto object-contain rounded-sm" referrerPolicy="no-referrer" />
           </div>
 
           {/* Desktop Menu */}

@@ -3,24 +3,24 @@ import { Star } from 'lucide-react';
 
 const reviews = [
   {
-    name: "Frances Tung",
-    time: "9 months ago",
-    text: "Fast response, problems, solutions and options clearly explained, job well done!",
-    initial: "F",
+    name: "Jenny Boyle",
+    time: "a year ago",
+    text: "I would definitely recommend Jax Heating and Cooling. Keeping me warm on these cold days, and cool in the blistering heat. Aaron is great at keeping on top of servicing and has even helped me by doing a ...",
+    initial: "J",
     color: "bg-jax-green"
   },
   {
-    name: "Domenic Pisante",
-    time: "9 months ago",
-    text: "Excellent service. The technician was very professional and fixed our AC unit quickly. Highly recommend Jax Heating & Cooling.",
-    initial: "D",
+    name: "Mr P Singh",
+    time: "a year ago",
+    text: "Have used these guys a couple of times now. Very happy with the way they conduct business. Aaron is very punctual and knows his stuff. Fresh install or repairs, these guys have got it covered.",
+    initial: "M",
     color: "bg-slate-700"
   },
   {
-    name: "Tushara Weerasooriya",
+    name: "Diane Cossie",
     time: "9 months ago",
-    text: "This is the second time we've had them come to our house to look at an issue and both times they were fantastic.",
-    initial: "T",
+    text: "We had an air conditioning unit fitted in our bedroom, he did a fantastic job, he was also very polite and tidy. Very pleased with everything.",
+    initial: "D",
     color: "bg-slate-800"
   }
 ];
@@ -49,7 +49,7 @@ export default function Testimonials() {
             <div className="flex text-yellow-400">
               {[...Array(5)].map((_, i) => <Star key={i} size={20} fill="currentColor" />)}
             </div>
-            <span className="text-slate-500 text-sm">(185 reviews)</span>
+            <span className="text-slate-500 text-sm">(3 reviews)</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}

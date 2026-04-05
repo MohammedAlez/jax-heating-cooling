@@ -1,4 +1,5 @@
 import { Flame, Snowflake, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import logoUrl from '/public/logo.jpg';
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             {/* Logo */}
             <div className="flex items-center gap-2 mb-6">
-              <img src="/logo.jpg" alt="Jax Heating & Cooling Logo" className="h-16 w-auto object-contain rounded-md" referrerPolicy="no-referrer" />
+              <img src={logoUrl} alt="Jax Heating & Cooling Logo" className="h-16 w-auto object-contain rounded-md" referrerPolicy="no-referrer" />
             </div>
             <p className="text-slate-400 max-w-md mb-6">
               Our licensed technicians deliver fast, reliable, and affordable heating, ventilation, air conditioning, and refrigeration services nationwide.
