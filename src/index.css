@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@theme {
+  --color-jax-green: #006847;
+  --color-jax-red: #E31837;
+  --color-jax-blue: #005EB8;
+  --color-jax-dark: #1A1A1A;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
