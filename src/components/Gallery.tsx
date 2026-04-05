@@ -1,10 +1,16 @@
 import { motion } from 'motion/react';
 
-// Dynamically import all images from the public/gallery folder
-const galleryModules = import.meta.glob('/public/gallery/*.{jpg,jpeg,png,webp,gif}', { eager: true });
-const uploadedImages = Object.keys(galleryModules).map(path => path.replace('/public', ''));
+// 1. We remove '/public' from the path. Vite maps the root '/' to the public folder.
+// 2. We add { as: 'url' } to ensure we get the string path directly.
+const galleryModules = import.meta.glob('/gallery/*.{jpg,jpeg,png,webp,gif}', { 
+  eager: true, 
+  as: 'url' 
+});
 
-// Use uploaded images
+// Extract the URL strings from the module object
+const uploadedImages = Object.values(galleryModules);
+
+// Process the images for the grid layout
 const displayImages = uploadedImages.map((src, index) => ({
   src,
   alt: `Gallery Image ${index + 1}`,
@@ -46,7 +52,7 @@ export default function Gallery() {
           
           {uploadedImages.length === 0 && (
             <p className="mt-4 text-sm text-amber-600 bg-amber-50 inline-block px-4 py-2 rounded-md border border-amber-200">
-              Note: Upload images to the <strong>/public/gallery</strong> folder to replace these placeholders automatically.
+              Note: Upload images to the <strong>/public/gallery</strong> folder to see them here.
             </p>
           )}
         </div>
@@ -65,8 +71,10 @@ export default function Gallery() {
                 src={image.src} 
                 alt={image.alt} 
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                // Adding loading="lazy" helps with performance for large galleries
+                loading="lazy" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-jax-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                 <span className="text-white font-bold text-lg">{image.alt}</span>
               </div>
             </motion.div>
